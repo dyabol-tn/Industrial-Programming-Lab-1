@@ -90,6 +90,9 @@ class CalculateSum extends Tailor {
                 checkSum = false;
             }
         }
+
+        double exact = 1 / Math.sqrt(1 + x);
+        System.out.printf("Точное значение через Math.sqrt: %." + precision + "f%n", exact);
     }
 }
 
@@ -122,6 +125,8 @@ class BigTailor {
         BigDecimal e = new BigDecimal(0);
         e = calculateE(k);
         BigCalculateSum.calculateBigSum(x, e);
+
+
     }
 }
 
@@ -146,5 +151,11 @@ class BigCalculateSum extends BigTailor {
             n++;
         }
         System.out.println("Сумма = " + resultSum);
+
+        BigDecimal exact = BigDecimal.ONE.divide(
+                BigDecimal.ONE.add(x).sqrt(mc), mc
+        );
+        System.out.println("Точное значение через sqrt: " + exact);
+
     }
 }
