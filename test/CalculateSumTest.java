@@ -4,5 +4,7 @@ class CalculateSumTest {
 
     @org.junit.jupiter.api.Test
     void calculateSum() {
+        CalculateSum sum = new CalculateSum();
+
     }
 }

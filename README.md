@@ -20,3 +20,10 @@
 
 ### Индивидуальное задание
 <img width="652" height="80" alt="image" src="https://github.com/user-attachments/assets/94525764-67fc-4b8a-88b5-58d73f97ed43" />
+
+## Laboratory Work 2
+### UNIT-тесты 
+
+### Общее задание:
+1. Использовать UNIT-тесты для тестирования лабораторной 1.
+2. Запись кода и кода тестов на GitHub
