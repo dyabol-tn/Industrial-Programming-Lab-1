@@ -156,6 +156,5 @@ class BigCalculateSum extends BigTailor {
                 BigDecimal.ONE.add(x).sqrt(mc), mc
         );
         System.out.println("Точное значение через sqrt: " + exact);
-
     }
 }
