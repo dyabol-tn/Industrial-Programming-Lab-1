@@ -32,10 +32,13 @@ class Tailor {
         double doubleK = k;
         int precision = k + 1;
         double resultE = calculateE(doubleK);
-        CalculateSum.calculateSum(x, resultE, precision);
+        //CalculateSum.calculateSum(x, resultE);
+        CalculateSum.printResults(x, CalculateSum.calculateSum(x, resultE), precision);
         Formatter fmt = new Formatter();
         fmt.format("Целое число в восьмеричной системе счисления: %o%nЦелое число в шестнадцатиричной системе счисления: %#x", k, k);
         System.out.println(fmt);
         fmt.flush();
+        fmt.close();
+        scanner.close();
     }
 }

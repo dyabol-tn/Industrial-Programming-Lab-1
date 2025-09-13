@@ -27,7 +27,7 @@ public class Main {
 }
 
 class CalculateSum extends Tailor {
-    public static void calculateSum(double x, double resultE, int precision) {
+    public static double calculateSum(double x, double resultE) {
         double sum = 1;
         double newAddend = 1;
         int n = 1;
@@ -41,7 +41,10 @@ class CalculateSum extends Tailor {
                 n++;
             }
             else {
-                Formatter fmtFoo = new Formatter();
+                checkSum = false;
+                }
+
+                /*Formatter fmtFoo = new Formatter();
                 fmtFoo.format("Число с плавающей точкой, используя спецификаторы: %" + 8 + "." + precision + "f", sum);
                 System.out.println(fmtFoo);
                 fmtFoo.flush();
@@ -49,12 +52,24 @@ class CalculateSum extends Tailor {
                 System.out.printf("%0(+#15.2f%n", sum);
                 System.out.print("Число с флагами (отрицательное): ");
                 System.out.printf("%0(+#15.2f%n", -sum);
-                checkSum = false;
-            }
+                checkSum = false;*/
         }
 
+        return sum;
+    }
+
+    public static void printResults(double x, double sum, int precision) {
+        Formatter fmtFoo = new Formatter();
+        fmtFoo.format("Число с плавающей точкой, используя спецификаторы: %" + 8 + "." + precision + "f", sum);
+        System.out.println(fmtFoo);
+        fmtFoo.flush();
+        System.out.print("Число с флагами (положительное): ");
+        System.out.printf("%0(+#15.2f%n", sum);
+        System.out.print("Число с флагами (отрицательное): ");
+        System.out.printf("%0(+#15.2f%n", -sum);
         double exact = 1 / Math.sqrt(1 + x);
         System.out.printf("Точное значение через Math.sqrt: %." + precision + "f%n", exact);
+        fmtFoo.close();
     }
 }
 
@@ -86,14 +101,12 @@ class BigTailor {
         BigInteger k = new BigInteger(input);
         BigDecimal e = new BigDecimal(0);
         e = calculateE(k);
-        BigCalculateSum.calculateBigSum(x, e);
-
-
+        BigCalculateSum.printBigRes(x, BigCalculateSum.calculateBigSum(x, e));
     }
 }
 
 class BigCalculateSum extends BigTailor {
-    public static void calculateBigSum(BigDecimal x, BigDecimal e) {
+    public static BigDecimal calculateBigSum(BigDecimal x, BigDecimal e) {
         BigDecimal resultSum = new BigDecimal(1);
         BigDecimal newAdd = new BigDecimal(1);
         BigDecimal sign = BigDecimal.ONE;
@@ -101,7 +114,7 @@ class BigCalculateSum extends BigTailor {
         boolean check = true;
         MathContext mc = MathContext.DECIMAL128;
 
-        while(check) {
+        while (true) {
             sign = sign.negate();
             BigDecimal fraction = BigDecimal.valueOf(2L * n - 1)
                     .divide(BigDecimal.valueOf(2L * n), mc);
@@ -112,6 +125,11 @@ class BigCalculateSum extends BigTailor {
             if (newAdd.abs().compareTo(e) < 0) break;
             n++;
         }
+        return resultSum;
+    }
+
+    public static void printBigRes(BigDecimal x, BigDecimal resultSum) {
+        MathContext mc = MathContext.DECIMAL128;
         System.out.println("Сумма = " + resultSum);
 
         BigDecimal exact = BigDecimal.ONE.divide(
