@@ -28,31 +28,20 @@ public class Main {
 
 class CalculateSum extends Tailor {
     public static double calculateSum(double x, double resultE) {
-        double sum = 1;
-        double newAddend = 1;
-        int n = 1;
+        double sum = 1.0;
+        double newAddend = 1.0;
+        int k = 2;
         boolean checkSum = true;
 
         while (checkSum) {
-            newAddend *= (Math.pow(-1, n)) * (((2.0 * n) - 1.0) / (2.0 * n) * x);
+            newAddend *= -1.0 * (k - 1.0) / k * x;
 
-            if (abs(newAddend) >= resultE) {
+            if (Math.abs(newAddend) >= resultE) {
                 sum += newAddend;
-                n++;
-            }
-            else {
+                k += 2;
+            } else {
                 checkSum = false;
-                }
-
-                /*Formatter fmtFoo = new Formatter();
-                fmtFoo.format("Число с плавающей точкой, используя спецификаторы: %" + 8 + "." + precision + "f", sum);
-                System.out.println(fmtFoo);
-                fmtFoo.flush();
-                System.out.print("Число с флагами (положительное): ");
-                System.out.printf("%0(+#15.2f%n", sum);
-                System.out.print("Число с флагами (отрицательное): ");
-                System.out.printf("%0(+#15.2f%n", -sum);
-                checkSum = false;*/
+            }
         }
 
         return sum;
@@ -67,6 +56,7 @@ class CalculateSum extends Tailor {
         System.out.printf("%0(+#15.2f%n", sum);
         System.out.print("Число с флагами (отрицательное): ");
         System.out.printf("%0(+#15.2f%n", -sum);
+        System.out.printf("--%15.20f%n", (double)12345678987654.0);
         double exact = 1 / Math.sqrt(1 + x);
         System.out.printf("Точное значение через Math.sqrt: %." + precision + "f%n", exact);
         fmtFoo.close();
@@ -107,24 +97,25 @@ class BigTailor {
 
 class BigCalculateSum extends BigTailor {
     public static BigDecimal calculateBigSum(BigDecimal x, BigDecimal e) {
-        BigDecimal resultSum = new BigDecimal(1);
-        BigDecimal newAdd = new BigDecimal(1);
-        BigDecimal sign = BigDecimal.ONE;
-        long n = 1;
-        boolean check = true;
+        BigDecimal resultSum = BigDecimal.ONE;
+        BigDecimal newAdd = BigDecimal.ONE;
+        long k = 2;
         MathContext mc = MathContext.DECIMAL128;
 
         while (true) {
-            sign = sign.negate();
-            BigDecimal fraction = BigDecimal.valueOf(2L * n - 1)
-                    .divide(BigDecimal.valueOf(2L * n), mc);
-            newAdd = newAdd.multiply(sign)
-                    .multiply(fraction)
-                    .multiply(x);
-            resultSum = resultSum.add(newAdd);
+            BigDecimal factor = BigDecimal.valueOf(k - 1)
+                    .divide(BigDecimal.valueOf(k), mc)
+                    .multiply(x, mc)
+                    .negate();
+
+            newAdd = newAdd.multiply(factor, mc);
+            resultSum = resultSum.add(newAdd, mc);
+
             if (newAdd.abs().compareTo(e) < 0) break;
-            n++;
+
+            k += 2;
         }
+
         return resultSum;
     }
 

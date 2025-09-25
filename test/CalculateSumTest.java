@@ -5,7 +5,7 @@ class CalculateSumTest {
     @org.junit.jupiter.api.Test
     void testcalculateSum() {
         double result = CalculateSum.calculateSum(0.3, 1e-5);
-        assertEquals(0.82619857999115, result, 1e-10);
+        assertEquals(0.8770608609481811, result, 1e-10);
     }
 
     @org.junit.jupiter.api.Test
