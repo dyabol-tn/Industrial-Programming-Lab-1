@@ -1,5 +1,6 @@
-# Semester-3
-
+# Semester-3:
+- [Laboratory Work 1](#laboratory-work-1)
+- [Laboratory Work 1 (дополнительная)](#laboratory-work-1-дополнительная)
 ## Laboratory Work 1
 ### Реализовать в двух вариантах: проcтые типы и используя классы BigDecimal, BigInteger. Использовать класс  Formatter, Scaner ( для варианта с простыми типами ), BufferedReader (для варианта с типами Big… ).
 
